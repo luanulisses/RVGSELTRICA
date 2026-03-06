@@ -1,0 +1,226 @@
+import React, { useState, useEffect } from 'react';
+import { Link, Outlet, NavLink, useLocation, useNavigate } from 'react-router-dom';
+import { supabase } from '../lib/supabase';
+import { NotificationBell, UrgentEventBanner } from '../components/admin/EventAlerts';
+
+import { LOGO_BASE64 } from '../constants/assets';
+
+const AdminLayout: React.FC = () => {
+    const location = useLocation();
+    const navigate = useNavigate();
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 768);
+
+    useEffect(() => {
+        const handleResize = () => setIsDesktop(window.innerWidth >= 768);
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
+    // Close sidebar on route change (mobile)
+    useEffect(() => {
+        setIsSidebarOpen(false);
+    }, [location.pathname]);
+
+    const menuItems = [
+        { name: 'Visão Geral', path: '/admin', icon: 'dashboard', end: true },
+        { name: 'Clientes', path: '/admin/clientes', icon: 'groups' },
+        { name: 'Orçamentos', path: '/admin/orcamentos', icon: 'request_quote' },
+        { name: 'Contratos', path: '/admin/contratos', icon: 'description' },
+        { name: 'Recibos e NF', path: '/admin/nota-fiscal', icon: 'receipt_long' },
+        { name: 'Fluxo de Caixa', path: '/admin/financeiro', icon: 'payments' },
+        { name: 'Agenda', path: '/admin/agenda', icon: 'calendar_month' },
+        { name: 'Fornecedores', path: '/admin/fornecedores', icon: 'local_shipping' },
+        { name: 'Conteúdo Site', path: '/admin/conteudo', icon: 'web' },
+        { name: 'Galeria', path: '/admin/galeria', icon: 'photo_library' },
+        { name: 'Depoimentos', path: '/admin/depoimentos', icon: 'reviews' },
+        { name: 'Pacotes', path: '/admin/pacotes', icon: 'inventory_2' },
+        { name: 'Relatórios', path: '/admin/relatorios', icon: 'analytics' },
+        { name: 'Configurações', path: '/admin/config', icon: 'settings' },
+    ];
+
+    const handleLogout = async () => {
+        if (confirm('Deseja realmente sair?')) {
+            await supabase.auth.signOut();
+            localStorage.removeItem('admin_auth');
+            navigate('/admin/login');
+        }
+    };
+
+    const sidebarVisible = isDesktop || isSidebarOpen;
+
+    return (
+        <div style={{ display: 'flex', height: '100vh', overflow: 'hidden', background: '#EEF4FB', fontFamily: 'inherit' }}>
+
+            {/* Mobile overlay */}
+            {!isDesktop && isSidebarOpen && (
+                <div
+                    onClick={() => setIsSidebarOpen(false)}
+                    style={{
+                        position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.5)',
+                        zIndex: 20, backdropFilter: 'blur(2px)'
+                    }}
+                />
+            )}
+
+            {/* Sidebar */}
+            <aside style={{
+                position: isDesktop ? 'relative' : 'fixed',
+                top: 0, left: 0, bottom: 0,
+                width: '256px',
+                minWidth: '256px',
+                background: '#fff',
+                borderRight: '1px solid rgba(21,101,192,0.12)',
+                display: 'flex',
+                flexDirection: 'column',
+                boxShadow: '2px 0 12px rgba(0,0,0,0.06)',
+                zIndex: 30,
+                transform: sidebarVisible ? 'translateX(0)' : 'translateX(-100%)',
+                transition: 'transform 0.3s ease',
+            }}>
+                {/* Logo */}
+                <div style={{ padding: '20px', borderBottom: '1px solid rgba(21,101,192,0.08)', textAlign: 'center' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '8px' }}>
+                        <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: '10px', textDecoration: 'none', flex: 1 }}>
+                            <img src={LOGO_BASE64} alt="RVGS" style={{ height: '40px', width: 'auto' }} />
+                            <div style={{ textAlign: 'left' }}>
+                                <h1 style={{ fontFamily: 'var(--font-display, Georgia)', fontSize: '15px', fontWeight: 800, color: '#F5A000', margin: 0, lineHeight: 1 }}>
+                                    RVGS
+                                </h1>
+                                <span style={{ fontSize: '11px', fontWeight: 700, color: '#1565C0', textTransform: 'uppercase', letterSpacing: '1px' }}>
+                                    ELÉTRICA
+                                </span>
+                            </div>
+                        </Link>
+                        {!isDesktop && (
+                            <button onClick={() => setIsSidebarOpen(false)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#1565C0', padding: '4px' }}>
+                                <span className="material-symbols-outlined">close</span>
+                            </button>
+                        )}
+                    </div>
+                </div>
+
+                {/* Nav */}
+                <nav style={{ flex: 1, overflowY: 'auto', padding: '16px 12px' }}>
+                    {menuItems.map((item) => {
+                        const isActive = item.end
+                            ? location.pathname === item.path
+                            : location.pathname.startsWith(item.path);
+                        return (
+                            <NavLink
+                                key={item.path}
+                                to={item.path}
+                                end={item.end}
+                                style={{
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    gap: '12px',
+                                    padding: '10px 16px',
+                                    borderRadius: '12px',
+                                    marginBottom: '4px',
+                                    textDecoration: 'none',
+                                    fontWeight: isActive ? 700 : 500,
+                                    fontSize: '14px',
+                                    color: isActive ? '#fff' : '#374151',
+                                    background: isActive ? '#F5A000' : 'transparent',
+                                    boxShadow: isActive ? '0 2px 8px rgba(245,160,0,0.35)' : 'none',
+                                    transition: 'all 0.15s ease',
+                                }}
+                                onMouseEnter={e => { if (!isActive) (e.currentTarget as HTMLElement).style.background = 'rgba(245,160,0,0.08)'; }}
+                                onMouseLeave={e => { if (!isActive) (e.currentTarget as HTMLElement).style.background = 'transparent'; }}
+                            >
+                                <span className="material-symbols-outlined" style={{ fontSize: '20px', color: isActive ? '#fff' : '#F5A000' }}>
+                                    {item.icon}
+                                </span>
+                                <span>{item.name}</span>
+                            </NavLink>
+                        );
+                    })}
+                </nav>
+
+                {/* Logout */}
+                <div style={{ padding: '16px', borderTop: '1px solid rgba(21,101,192,0.1)' }}>
+                    <button
+                        onClick={handleLogout}
+                        style={{
+                            display: 'flex', alignItems: 'center', gap: '12px',
+                            width: '100%', padding: '10px 16px', borderRadius: '12px',
+                            background: 'none', border: 'none', cursor: 'pointer',
+                            color: '#e53e3e', fontSize: '14px', fontWeight: 600,
+                            transition: 'background 0.15s',
+                        }}
+                        onMouseEnter={e => (e.currentTarget.style.background = '#FFF5F5')}
+                        onMouseLeave={e => (e.currentTarget.style.background = 'none')}
+                    >
+                        <span className="material-symbols-outlined" style={{ fontSize: '20px' }}>logout</span>
+                        Sair
+                    </button>
+                </div>
+            </aside>
+
+            {/* Main Content */}
+            <main style={{ flex: 1, overflowY: 'auto', display: 'flex', flexDirection: 'column' }}>
+                {/* Topbar */}
+                <header style={{
+                    background: 'rgba(255,255,255,0.9)',
+                    backdropFilter: 'blur(10px)',
+                    position: 'sticky', top: 0, zIndex: 10,
+                    padding: isDesktop ? '16px 24px' : '12px 16px',
+                    borderBottom: '1px solid rgba(21,101,192,0.08)',
+                    display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+                    boxShadow: '0 1px 4px rgba(0,0,0,0.04)',
+                }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+                        {/* Hamburger (mobile only) */}
+                        {!isDesktop && (
+                            <button
+                                onClick={() => setIsSidebarOpen(true)}
+                                style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#F5A000', padding: '4px' }}
+                            >
+                                <span className="material-symbols-outlined">menu</span>
+                            </button>
+                        )}
+                        <h2 style={{ fontFamily: 'var(--font-display, Georgia)', fontSize: isDesktop ? '20px' : '18px', fontWeight: 700, color: '#1A237E', margin: 0 }}>
+                            {menuItems.find(item =>
+                                item.end ? location.pathname === item.path : location.pathname.startsWith(item.path)
+                            )?.name || 'Dashboard'}
+                        </h2>
+                    </div>
+
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                        <Link
+                            to="/"
+                            target="_blank"
+                            style={{
+                                display: 'flex', alignItems: 'center', gap: '6px',
+                                padding: isDesktop ? '6px 14px' : '6px 8px', borderRadius: '20px',
+                                color: '#1565C0', textDecoration: 'none', fontSize: '13px', fontWeight: 700,
+                                border: '1px solid rgba(21,101,192,0.2)',
+                                background: 'transparent',
+                                transition: 'all 0.15s',
+                            }}
+                        >
+                            <span className="material-symbols-outlined" style={{ fontSize: '16px' }}>visibility</span>
+                            {isDesktop && "Ver Site"}
+                        </Link>
+                        <NotificationBell />
+                        <div style={{
+                            width: '36px', height: '36px', borderRadius: '50%',
+                            background: '#1565C0', color: '#fff',
+                            display: 'flex', alignItems: 'center', justifyContent: 'center',
+                            fontWeight: 700, fontSize: '14px',
+                        }}>A</div>
+                    </div>
+                </header>
+
+                {/* Page Content */}
+                <div style={{ padding: isDesktop ? '24px 32px' : '16px', flex: 1 }}>
+                    <UrgentEventBanner />
+                    <Outlet />
+                </div>
+            </main>
+        </div>
+    );
+};
+
+export default AdminLayout;
