@@ -26,6 +26,10 @@
   --color-text-body: #2C3E6B;
   --color-text-muted: #6B7BAB;
 
+  /* Layout Tokens */
+  --container-px: clamp(20px, 5vw, 48px);
+  --section-py: clamp(60px, 8vw, 100px);
+
   /* Legados (manter compatibilidade) */
   --color-dark: #EEF4FB;
   --color-dark-mid: #F5F9FF;
@@ -38,6 +42,7 @@
 html {
   scroll-behavior: smooth;
   overflow-x: hidden;
+  width: 100%;
 }
 
 body {
@@ -45,6 +50,8 @@ body {
   background-color: var(--color-bg);
   color: var(--color-text-body);
   min-height: 100vh;
+  width: 100%;
+  overflow-x: hidden;
 }
 
 #root {
@@ -66,6 +73,24 @@ h6 {
 
 /* Custom Utilities */
 @layer utilities {
+  .responsive-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-left: var(--container-px);
+    padding-right: var(--container-px);
+  }
+
+  .desktop-only {
+    display: none !important;
+  }
+
+  @media (min-width: 768px) {
+    .desktop-only {
+      display: flex !important;
+    }
+  }
+
   .hero-bg {
     background:
       radial-gradient(ellipse at 15% 60%, rgba(245, 160, 0, 0.18) 0%, transparent 55%),
@@ -208,20 +233,19 @@ h6 {
 
 /* SECTION BASE */
 section {
-  padding: 100px 48px;
-  max-width: 1200px;
-  margin: 0 auto;
+  padding: var(--section-py) 0;
+  width: 100%;
 }
 
 .section-full {
-  max-width: 100%;
-  padding: 100px 0;
+  width: 100%;
+  padding: var(--section-py) 0;
 }
 
 .section-inner {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 48px;
+  padding: 0 var(--container-px);
 }
 
 .section-tag {
