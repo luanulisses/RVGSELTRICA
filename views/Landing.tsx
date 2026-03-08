@@ -209,10 +209,10 @@ const Landing: React.FC = () => {
                 </div>
 
                 <div className="responsive-container" style={{ position: 'relative', zIndex: 10, paddingTop: '120px', paddingBottom: '80px' }}>
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '48px', alignItems: 'center' }} className="md:grid-cols-[1fr_1.2fr]">
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '48px', alignItems: 'center', textAlign: 'center' }}>
 
-                        {/* Hero Image Section (Responsive Order) */}
-                        <div className="order-1 md:order-2" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+                        {/* Hero Image Section */}
+                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
                             <div style={{ position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', maxWidth: 'min(90%, 450px)' }}>
                                 {/* Glow */}
                                 <div className="animate-logo-pulse" style={{ position: 'absolute', inset: '-60px', background: `radial-gradient(ellipse at center, ${C.orange}44 0%, ${C.blueLight}22 40%, transparent 70%)`, borderRadius: '50%' }} />
@@ -241,9 +241,9 @@ const Landing: React.FC = () => {
                         </div>
 
                         {/* Hero Text Section */}
-                        <div className="order-2 md:order-1 flex flex-col text-center md:text-left">
+                        <div className="flex flex-col text-center">
                             {/* Badge */}
-                            <div style={{ display: 'inline-flex', alignSelf: 'center', alignItems: 'center', gap: '8px', background: `${C.orange}18`, border: `1px solid ${C.orange}44`, color: C.orangeLight, padding: '6px 16px', borderRadius: '999px', fontSize: '0.65rem', fontWeight: 700, letterSpacing: '3px', textTransform: 'uppercase', marginBottom: '24px' }} className="md:self-start">
+                            <div style={{ display: 'inline-flex', alignSelf: 'center', alignItems: 'center', gap: '8px', background: `${C.orange}18`, border: `1px solid ${C.orange}44`, color: C.orangeLight, padding: '6px 16px', borderRadius: '999px', fontSize: '0.65rem', fontWeight: 700, letterSpacing: '3px', textTransform: 'uppercase', marginBottom: '24px' }}>
                                 <span style={{ width: '6px', height: '6px', background: C.orange, borderRadius: '50%', boxShadow: `0 0 8px ${C.orange}` }} className="animate-pulse" />
                                 Excelência em Fotovoltaica
                             </div>
@@ -254,30 +254,22 @@ const Landing: React.FC = () => {
                                 <span style={{ color: '#FFFFFF' }}>SISTEMAS</span>
                             </h1>
 
-                            <p style={{ color: 'rgba(255,255,255,0.7)', fontSize: 'clamp(0.95rem, 3vw, 1.1rem)', lineHeight: 1.6, marginBottom: '32px', maxWidth: '480px' }} className="mx-auto md:mx-0">
+                            <p style={{ color: 'rgba(255,255,255,0.7)', fontSize: 'clamp(0.95rem, 3vw, 1.1rem)', lineHeight: 1.6, marginBottom: '32px', maxWidth: '480px' }} className="mx-auto">
                                 A RVGS Elétrica traz para você o melhor da tecnologia solar. Reduza custos, aumente a sustentabilidade e garanta sua independência energética com quem é especialista.
                             </p>
 
-                            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '16px', justifyContent: 'center' }} className="md:justify-start">
+                            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '16px', justifyContent: 'center' }}>
                                 <button
                                     onClick={() => scrollToSection('contact')}
                                     style={{ background: `linear-gradient(135deg, ${C.orange}, ${C.orangeLight})`, color: '#fff', border: 'none', cursor: 'pointer', padding: '16px 32px', borderRadius: '8px', fontWeight: 700, fontSize: '0.85rem', letterSpacing: '2px', textTransform: 'uppercase', boxShadow: `0 8px 24px ${C.orange}44`, flex: '1 1 auto', minWidth: 'min(100%, 200px)' }}
                                 >Solicitar Estudo</button>
                                 <button
-                                    onClick={() => scrollToSection('solar')}
+                                    onClick={() => scrollToSection('services')}
                                     style={{ background: 'transparent', color: '#FFFFFF', border: `1.5px solid rgba(255,255,255,0.2)`, cursor: 'pointer', padding: '16px 32px', borderRadius: '8px', fontWeight: 600, fontSize: '0.85rem', letterSpacing: '2px', textTransform: 'uppercase', flex: '1 1 auto', minWidth: 'min(100%, 200px)' }}
                                 >Saiba Mais</button>
                             </div>
 
-                            {/* Stats */}
-                            <div style={{ display: 'flex', gap: 'max(20px, 4vw)', marginTop: '48px', paddingTop: '32px', borderTop: `1px solid rgba(255,255,255,0.1)`, justifyContent: 'center' }} className="md:justify-start">
-                                {[{ val: '+10', label: 'Anos' }, { val: '+500', label: 'Projetos' }, { val: '98%', label: 'Economia' }].map(stat => (
-                                    <div key={stat.label} style={{ textAlign: 'center' }}>
-                                        <div style={{ fontSize: 'clamp(1.8rem, 5vw, 2.5rem)', fontWeight: 700, color: C.orange, lineHeight: 1 }}>{stat.val}</div>
-                                        <div style={{ fontSize: '0.6rem', color: 'rgba(255,255,255,0.5)', textTransform: 'uppercase', letterSpacing: '2px', marginTop: '4px' }}>{stat.label}</div>
-                                    </div>
-                                ))}
-                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -286,19 +278,18 @@ const Landing: React.FC = () => {
             {/* ── SOLAR SECTION ── */}
             <div className="solar-section section-full" id="fotovoltaica">
                 <div className="solar-hero-wrap lg:grid-cols-2" style={{ display: 'grid', gridTemplateColumns: '1fr', width: '100%' }}>
-                    <div className="solar-left" style={{ padding: 'var(--section-py) var(--container-px)' }}>
+                    <div className="solar-left" style={{ padding: 'var(--section-py) var(--container-px)', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                         <div className="section-tag">⚡ Destaque</div>
                         <h2 className="section-title" style={{ color: C.white }}>ELÉTRICA<br /><span style={{ color: C.orange }}>FOTOVOLTAICA</span></h2>
-                        <p className="section-desc" style={{ color: 'rgba(255,255,255,0.7)' }}>
+                        <p className="section-desc" style={{ color: 'rgba(255,255,255,0.7)', margin: '0 auto 32px' }}>
                             Projete e instale sua usina solar com total segurança técnica. Atendemos desde residências até grandes empreendimentos.
                         </p>
-                        <ul className="service-list">
+                        <ul className="service-list" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', maxWidth: '500px' }}>
                             {[
                                 { icon: '🏭', title: 'Projeto de Micro Usina', desc: 'Dimensionamento completo e homologação.' },
                                 { icon: '🔧', title: 'Instalação de Módulos', desc: 'Montagem profissional certificada.' },
-                                { icon: '🚗', title: 'Wallbox Carros Elétricos', desc: 'Carregador integrado ao seu sistema solar.' }
                             ].map(s => (
-                                <li key={s.title} className="service-item">
+                                <li key={s.title} className="service-item" style={{ textAlign: 'left', width: '100%' }}>
                                     <div className="service-icon">{s.icon}</div>
                                     <div className="service-text">
                                         <strong style={{ color: '#FFF' }}>{s.title}</strong>
@@ -309,17 +300,17 @@ const Landing: React.FC = () => {
                         </ul>
                     </div>
 
-                    <div className="solar-right" style={{ padding: 'var(--section-py) var(--container-px)' }}>
+                    <div className="solar-right" style={{ padding: 'var(--section-py) var(--container-px)', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                         <div className="section-tag">📋 Por que solar?</div>
                         <h2 className="section-title" style={{ color: C.white }}>VANTAGENS<br /><span style={{ color: C.blueSky }}>DO SISTEMA</span></h2>
-                        <div style={{ marginTop: 32, display: 'flex', flexDirection: 'column', gap: 24 }}>
+                        <div style={{ marginTop: 32, display: 'flex', flexDirection: 'column', gap: 24, alignItems: 'center', width: '100%', maxWidth: '500px' }}>
                             {[
                                 { icon: '💰', title: 'Retorno sobre investimento', desc: 'Média 3 a 5 anos, geração por 25+ anos.' },
                                 { icon: '🌱', title: 'Sustentabilidade', desc: 'Energia limpa e renovável, zero CO₂.' },
                                 { icon: '📈', title: 'Valorização do imóvel', desc: 'Imóveis valem até 8% mais.' },
                                 { icon: '🔋', title: 'Independência energética', desc: 'Proteção contra aumentos tarifários.' }
                             ].map(v => (
-                                <div key={v.title} style={{ display: 'flex', gap: 16, alignItems: 'flex-start' }}>
+                                <div key={v.title} style={{ display: 'flex', gap: 16, alignItems: 'flex-start', textAlign: 'left', width: '100%' }}>
                                     <div style={{ fontSize: '2rem' }}>{v.icon}</div>
                                     <div>
                                         <strong style={{ display: 'block', marginBottom: 4, color: '#FFF' }}>{v.title}</strong>
@@ -352,7 +343,19 @@ const Landing: React.FC = () => {
                             <ul className="card-items">
                                 <li>Projeto de micro usina fotovoltaica</li>
                                 <li>Instalação e montagem de módulos fotovoltaicos</li>
-                                <li>Instalação de Wallbox para carros elétricos</li>
+                            </ul>
+                        </div>
+
+                        {/* Wallbox */}
+                        <div className="service-card">
+                            <span className="card-icon">🚗</span>
+                            <h3 className="card-title" style={{ color: 'var(--color-bg)' }}>Wallbox Carros Elétricos</h3>
+                            <p className="card-desc">Instalação de carregadores para veículos elétricos em residências e empresas.</p>
+                            <ul className="card-items">
+                                <li>Instalação de Wallbox residencial e comercial</li>
+                                <li>Integração com sistema solar fotovoltaico</li>
+                                <li>Dimensionamento da infraestrutura elétrica</li>
+                                <li>Suporte técnico e garantia</li>
                             </ul>
                         </div>
 
@@ -362,7 +365,7 @@ const Landing: React.FC = () => {
                             <h3 className="card-title" style={{ color: 'var(--color-bg)' }}>Elétrica Residencial</h3>
                             <p className="card-desc">Instalações elétricas residenciais com segurança e qualidade.</p>
                             <ul className="card-items">
-                                <li>Padrão de entrada Neoenergia / CAESB</li>
+                                <li>Padrão de entrada Neoenergia</li>
                                 <li>Infraestrutura elétrica</li>
                                 <li>Montagem de quadro de disjuntores</li>
                                 <li>Interruptores, tomadas e luminárias</li>
@@ -376,6 +379,7 @@ const Landing: React.FC = () => {
                             <h3 className="card-title" style={{ color: 'var(--color-bg)' }}>Hidráulica</h3>
                             <p className="card-desc">Soluções completas em água fria, quente e pluvial.</p>
                             <ul className="card-items">
+                                <li>Padrão CAESB</li>
                                 <li>Instalações de água fria</li>
                                 <li>Instalações de água quente</li>
                                 <li>Sistemas pluviais e drenagem</li>
@@ -422,6 +426,88 @@ const Landing: React.FC = () => {
                                 <p style={{ fontSize: '0.9rem', color: C.muted, lineHeight: 1.6 }}>{card.desc}</p>
                             </div>
                         ))}
+                    </div>
+                </section>
+
+                <div style={{ height: '1px', background: `linear-gradient(to right, transparent, rgba(235,113,2,0.2), transparent)`, margin: '0 48px' }} />
+
+                {/* ── INSTAGRAM / WORKS SECTION ── */}
+                <section id="works" className="responsive-container" style={{ paddingBottom: '80px' }}>
+                    <div style={{ textAlign: 'center', marginBottom: '48px' }}>
+                        <div className="section-tag">📸 Nosso Trabalho</div>
+                        <h2 className="section-title">NOSSAS<br /><span style={{ color: C.orange }}>OBRAS</span></h2>
+                        <p className="section-desc" style={{ margin: '0 auto' }}>Confira fotos reais de nossas instalações e acompanhe nosso dia a dia no Instagram.</p>
+                    </div>
+
+                    <div style={{
+                        display: 'grid',
+                        gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+                        gap: '20px',
+                        marginBottom: '40px'
+                    }}>
+                        {[
+                            { img: '/gallery/obra1.png', title: 'Solar Residencial' },
+                            { img: '/gallery/obra2.png', title: 'Carregador Wallbox' },
+                            { img: '/gallery/obra3.png', title: 'Quadro Elétrico' },
+                            { img: '/gallery/obra4.png', title: 'Usina Solar' }
+                        ].map((work, i) => (
+                            <div key={i} className="glass-card" style={{
+                                padding: '8px',
+                                borderRadius: '16px',
+                                overflow: 'hidden',
+                                transition: 'transform 0.3s ease'
+                            }}
+                                onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.02)'}
+                                onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
+                            >
+                                <img
+                                    src={work.img}
+                                    alt={work.title}
+                                    style={{
+                                        width: '100%',
+                                        aspectRatio: '16/9',
+                                        objectFit: 'cover',
+                                        borderRadius: '12px',
+                                        display: 'block'
+                                    }}
+                                />
+                                <div style={{ padding: '12px 8px', fontSize: '0.85rem', fontWeight: 600, color: C.navy, textAlign: 'center' }}>
+                                    {work.title}
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+
+                    <div style={{ textAlign: 'center' }}>
+                        <a
+                            href="https://www.instagram.com/rvgsc?igsh=YXd3Mjk4a3hweTZk"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            style={{
+                                display: 'inline-flex',
+                                alignItems: 'center',
+                                gap: '12px',
+                                background: 'linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%)',
+                                color: '#fff',
+                                padding: '16px 32px',
+                                borderRadius: '12px',
+                                fontWeight: 700,
+                                textDecoration: 'none',
+                                boxShadow: '0 8px 20px rgba(204, 35, 102, 0.3)',
+                                transition: 'all 0.3s ease'
+                            }}
+                            onMouseEnter={e => {
+                                e.currentTarget.style.transform = 'translateY(-3px)';
+                                e.currentTarget.style.boxShadow = '0 12px 28px rgba(204, 35, 102, 0.4)';
+                            }}
+                            onMouseLeave={e => {
+                                e.currentTarget.style.transform = 'translateY(0)';
+                                e.currentTarget.style.boxShadow = '0 8px 20px rgba(204, 35, 102, 0.3)';
+                            }}
+                        >
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                            Ver Perfil Completo no Instagram
+                        </a>
                     </div>
                 </section>
 
