@@ -208,12 +208,12 @@ const Landing: React.FC = () => {
                     </svg>
                 </div>
 
-                <div className="responsive-container" style={{ position: 'relative', zIndex: 10, paddingTop: '120px', paddingBottom: '80px' }}>
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '48px', alignItems: 'center', textAlign: 'center' }}>
+                <div className="responsive-container" style={{ position: 'relative', zIndex: 10, paddingTop: '100px', paddingBottom: '60px' }}>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '32px', alignItems: 'center', textAlign: 'center' }}>
 
                         {/* Hero Image Section */}
                         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-                            <div style={{ position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', maxWidth: 'min(90%, 450px)' }}>
+                            <div style={{ position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', maxWidth: 'min(85%, 320px)' }}>
                                 {/* Glow */}
                                 <div className="animate-logo-pulse" style={{ position: 'absolute', inset: '-60px', background: `radial-gradient(ellipse at center, ${C.orange}44 0%, ${C.blueLight}22 40%, transparent 70%)`, borderRadius: '50%' }} />
                                 {/* Rings */}
@@ -249,7 +249,7 @@ const Landing: React.FC = () => {
                             </div>
 
                             {/* Heading */}
-                            <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(3.2rem, 10vw, 5.5rem)', lineHeight: 0.9, marginBottom: '24px' }}>
+                            <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(2.5rem, 6vw, 4rem)', lineHeight: 0.9, marginBottom: '16px' }}>
                                 <span style={{ color: C.orange, display: 'block' }}>SOLAR</span>
                                 <span style={{ color: '#FFFFFF' }}>SISTEMAS</span>
                             </h1>
@@ -480,7 +480,7 @@ const Landing: React.FC = () => {
 
                     <div style={{ textAlign: 'center' }}>
                         <a
-                            href="https://www.instagram.com/rvgsc?igsh=YXd3Mjk4a3hweTZk"
+                            href="https://www.instagram.com/rvgseletricafotovoltaica?igsh=MWF2Njl5ZXBoZm41Zw%3D%3D&utm_source=qr"
                             target="_blank"
                             rel="noopener noreferrer"
                             style={{
