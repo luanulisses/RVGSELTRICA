@@ -36,8 +36,8 @@ seoPages.forEach(page => {
                 {
                     "@type": "LocalBusiness",
                     "name": "RVGS Elétrica",
-                    "image": "https://rvgseletrica.com.br/icon-192.png",
-                    "url": "https://rvgseletrica.com.br",
+                    "image": "https://www.rvgseletricafotovoltaica.com/icon-192.png",
+                    "url": "https://www.rvgseletricafotovoltaica.com",
                     "telephone": "+5561993801434",
                     "address": {
                         "@type": "PostalAddress",
@@ -132,11 +132,11 @@ seoPages.forEach(page => {
     );
     modifiedHtml = modifiedHtml.replace(
         /<meta\s+property="og:url"\s+content="[^"]*"\s*\/?>/,
-        `<meta property="og:url" content="https://rvgseletrica.com.br/servicos/${page.slug}" />`
+        `<meta property="og:url" content="https://www.rvgseletricafotovoltaica.com/servicos/${page.slug}" />`
     );
 
     // Injeta Canonical Tag
-    const canonicalTag = `<link rel="canonical" href="https://rvgseletrica.com.br/servicos/${page.slug}" />\n</head>`;
+    const canonicalTag = `<link rel="canonical" href="https://www.rvgseletricafotovoltaica.com/servicos/${page.slug}" />\n</head>`;
     modifiedHtml = modifiedHtml.replace('</head>', canonicalTag);
 
     // Injeta JSON-LD

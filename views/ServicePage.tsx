@@ -110,8 +110,8 @@ const ServicePage: React.FC = () => {
                 {
                     "@type": "LocalBusiness",
                     "name": "RVGS Elétrica",
-                    "image": "https://rvgseletrica.com.br/icon-192.png",
-                    "url": "https://rvgseletrica.com.br",
+                    "image": "https://www.rvgseletricafotovoltaica.com/icon-192.png",
+                    "url": "https://www.rvgseletricafotovoltaica.com",
                     "telephone": "+5561993801434",
                     "address": {
                         "@type": "PostalAddress",
