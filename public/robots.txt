@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Allow: /galeria
+Allow: /servicos/*
+Disallow: /admin/
+Disallow: /admin/*
+
+Sitemap: https://rvgseletrica.com.br/sitemap.xml

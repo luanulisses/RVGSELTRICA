@@ -36,6 +36,7 @@ const AdminLayout: React.FC = () => {
         { name: 'Depoimentos', path: '/admin/depoimentos', icon: 'reviews' },
         { name: 'Pacotes', path: '/admin/pacotes', icon: 'inventory_2' },
         { name: 'Relatórios', path: '/admin/relatorios', icon: 'analytics' },
+        { name: 'Assinatura', path: '/admin/billing', icon: 'credit_card' },
         { name: 'Configurações', path: '/admin/config', icon: 'settings' },
     ];
 

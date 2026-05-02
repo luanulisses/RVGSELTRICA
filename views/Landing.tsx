@@ -344,6 +344,7 @@ const Landing: React.FC = () => {
                                 <li>Projeto de micro usina fotovoltaica</li>
                                 <li>Instalação e montagem de módulos fotovoltaicos</li>
                             </ul>
+                            <Link to="/servicos/energia-solar-brasilia" style={{ display: 'inline-block', marginTop: '16px', color: '#1A237E', fontWeight: 'bold', textDecoration: 'none', borderBottom: '1px solid #1A237E' }}>Saber mais sobre Energia Solar</Link>
                         </div>
 
                         {/* Wallbox */}
@@ -371,6 +372,7 @@ const Landing: React.FC = () => {
                                 <li>Interruptores, tomadas e luminárias</li>
                                 <li>Instalação de perfil de LEDs</li>
                             </ul>
+                            <Link to="/servicos/eletricista-residencial-brasilia" style={{ display: 'inline-block', marginTop: '16px', color: '#1A237E', fontWeight: 'bold', textDecoration: 'none', borderBottom: '1px solid #1A237E' }}>Saber mais sobre Serviços Elétricos</Link>
                         </div>
 
                         {/* Hidráulica */}
